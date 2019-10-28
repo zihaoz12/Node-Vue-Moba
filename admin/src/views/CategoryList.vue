@@ -4,8 +4,10 @@
             <el-table :data="items">
                 <el-table-column prop="_id" label="ID" width="240">
                 </el-table-column>
-                <el-table-column prop="name" label="Category name" >
+                <el-table-column prop="parent.name" label=" Parent Category" >
                 </el-table-column>  
+                <el-table-column prop="name" label="Category name" >
+                </el-table-column> 
                 <el-table-column fixed="right" label="Options" width="180">
                     <template v-slot="scope">
                         <el-button type="text" size="small"

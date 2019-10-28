@@ -10,9 +10,8 @@ router.post('/categories',async(req,res)=>{
 
 
 router.get('/categories',async(req,res)=>{
-    const items = await Category.find().limit(10);
+    const items = await Category.find().populate('parent').limit(10);
     res.send(items)
-    console.log(items)
 });
 
 
