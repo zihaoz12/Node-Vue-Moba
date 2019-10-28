@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 app.use(require('cors')())
 app.use(express.json())
-
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 
 

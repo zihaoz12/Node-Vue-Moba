@@ -9,6 +9,11 @@
           <el-menu-item index="/categories/create">Create New Category</el-menu-item>
           <el-menu-item index="/categories/list">Category List</el-menu-item>
         </el-menu-item-group>
+        <el-menu-item-group>
+          <template slot="title">Item</template>
+          <el-menu-item index="/items/create">Create New Item</el-menu-item>
+          <el-menu-item index="/items/list">Items List</el-menu-item>
+        </el-menu-item-group>
        
       </el-submenu>
       
