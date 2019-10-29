@@ -82,7 +82,35 @@
                          
                 </el-tab-pane>
                 <el-tab-pane label="Hero Skills" name="skills">
-                    <el-button type="text"><i class="el-icon-plus"> Add Skills</i></el-button>
+                    <el-button type="text" @click="model.skills.push({})"><i class="el-icon-plus"> Add Skills</i></el-button>
+                    <el-row type="flex" style="flex-wrap: wrap">
+                        <el-col :md="12" v-for="(item, i) in model.skills" :key="i">
+                            <el-form-item label="name">   
+                                <el-input v-model="item.name"></el-input>
+                            </el-form-item>
+                            <el-form-item label="Icon">   
+                                <el-upload
+                                    class="avatar-uploader"
+                                    :action="$http.defaults.baseURL + '/upload'"
+                                    :show-file-list="false"
+                                    :on-success="res => $set(item,'icon', res.url)"
+                                >
+                                <img v-if="item.icon" :src="item.icon" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </el-form-item>
+                            <el-form-item label="Description">   
+                                <el-input v-model="item.description" type="textarea"></el-input>
+                            </el-form-item>
+                            <el-form-item label="Tips">   
+                                <el-input v-model="item.tips" type="textarea"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button size="small" type="danger" 
+                                @click="model.skills.splice(i,1)">Delete</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
             </el-tabs> 
             <el-form-item style="margin-top: 1rem;">
@@ -169,8 +197,8 @@ export default {
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
-    width: 178px;
-    height: 178px;
+    width: 5rem;
+    height: 5rem;
     line-height: 178px;
     text-align: center;
   }
