@@ -50,6 +50,9 @@ const HeroSchema = new mongoose.Schema({
     usageTips:{
         type: String
     },
+    battleTips:{
+        type: String
+    },
     teamTips:{
         type: String
     },

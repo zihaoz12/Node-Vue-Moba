@@ -6,6 +6,8 @@
                 </el-table-column> 
                 <el-table-column prop="name" label="Hero name" >
                 </el-table-column> 
+                <el-table-column prop="title" label="Hero name" >
+                </el-table-column>
                 <el-table-column prop="avatar" label="Hero avatar" >
                     <template v-slot="scope">
                         <img :src="scope.row.avatar" style="height:3rem">
