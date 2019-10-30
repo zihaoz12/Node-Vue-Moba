@@ -19,6 +19,11 @@
           <el-menu-item index="/heroes/create">Create New Hero</el-menu-item>
           <el-menu-item index="/heroes/list">Heroes List</el-menu-item>
         </el-menu-item-group>
+        <el-menu-item-group>
+          <template slot="title">Article</template>
+          <el-menu-item index="/articles/create">Create New Article</el-menu-item>
+          <el-menu-item index="/articles/list">Articles List</el-menu-item>
+        </el-menu-item-group>
        
       </el-submenu>
       
