@@ -1,14 +1,9 @@
 <template>
 <el-container style="height: 100vh; ">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu router :default-openeds="['1','3']">
+    <el-menu router :default-openeds="['3']" unique-opened: default-active="$route.path">
       <el-submenu  index="1">
-        <template slot="title"><i class="el-icon-message"></i>Data Manager</template>
-        <el-menu-item-group>
-          <template slot="title">Catagory</template>
-          <el-menu-item index="/categories/create">Create New Category</el-menu-item>
-          <el-menu-item index="/categories/list">Category List</el-menu-item>
-        </el-menu-item-group>
+        <template slot="title"><i class="el-icon-message"></i>Data Manager</template>        
         <el-menu-item-group>
           <template slot="title">Item</template>
           <el-menu-item index="/items/create">Create New Item</el-menu-item>
@@ -24,12 +19,33 @@
           <el-menu-item index="/articles/create">Create New Article</el-menu-item>
           <el-menu-item index="/articles/list">Articles List</el-menu-item>
         </el-menu-item-group>
-       <el-menu-item-group>
+      </el-submenu>
+
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="el-icon-message"></i>General Data
+        </template>
+        <el-menu-item-group>
           <template slot="title">Ads</template>
           <el-menu-item index="/ads/create">Create New Adv</el-menu-item>
           <el-menu-item index="/ads/list">Adv List</el-menu-item>
         </el-menu-item-group>
+      </el-submenu>
 
+       <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-message"></i>Admin Setting
+        </template>
+        <el-menu-item-group>
+          <template slot="title">Catagory</template>
+          <el-menu-item index="/categories/create">Create New Category</el-menu-item>
+          <el-menu-item index="/categories/list">Category List</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group>
+          <template slot="title">Admin</template>
+          <el-menu-item index="/admin_users/create">Create New Admin</el-menu-item>
+          <el-menu-item index="/admin_users/list">Admin List</el-menu-item>
+        </el-menu-item-group>
       </el-submenu>
       
     </el-menu>
