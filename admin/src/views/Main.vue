@@ -24,7 +24,12 @@
           <el-menu-item index="/articles/create">Create New Article</el-menu-item>
           <el-menu-item index="/articles/list">Articles List</el-menu-item>
         </el-menu-item-group>
-       
+       <el-menu-item-group>
+          <template slot="title">Ads</template>
+          <el-menu-item index="/ads/create">Create New Adv</el-menu-item>
+          <el-menu-item index="/ads/list">Adv List</el-menu-item>
+        </el-menu-item-group>
+
       </el-submenu>
       
     </el-menu>

@@ -16,7 +16,10 @@
                 <el-input v-model="model.title"></el-input>
             </el-form-item>
             <el-form-item label=" Article Body " >
-                <vue-editor v-model="model.body"></vue-editor>
+                <vue-editor v-model="model.body" 
+                            useCustomImageHandler
+                            @image-added="handleImageAdded"
+                ></vue-editor>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" native-type="submit">Save</el-button>
@@ -65,8 +68,21 @@ export default {
         async fetchCategories(){
             const res = await this.$http.get(`rest/categories`)
             this.categories = res.data
+        },
+        //Upload image via vue2-editor
+        async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+            // An example of using FormData
+            // NOTE: Your key could be different such as:
+            // formData.append('file', file)
+ 
+            const formData = new FormData();
+            formData.append("file", file); //file = server/admin/index.js upload.single('file')
+ 
+            const res = await this.$http.post('upload', formData);
+            Editor.insertEmbed(cursorLocation, "image", res.data.url);
+            resetUploader();
+   
         }
-
     },
     created(){
         this.fetchCategories()
