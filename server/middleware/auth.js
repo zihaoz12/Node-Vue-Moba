@@ -6,7 +6,7 @@ module.exports = options =>{
 
     return async(req,res,next)=>{
         //1. get token
-        const token = String(req.headers.authorization || '').split('').pop()
+        const token = String(req.headers.authorization || '').split(' ').pop()
         console.log('token:' + token)
         assert(token, 401, ' Please Login (jwt token must be provided) ')
         //2. find server 'secret'

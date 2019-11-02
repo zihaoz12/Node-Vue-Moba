@@ -6,10 +6,9 @@ module.exports = app =>{
     const router = express.Router({
         mergeParams:true
     })
-    const Category = require('../../models/Category')
     
-    router.post('/',async(req,res)=>{
-        
+    
+    router.post('/',async(req,res)=>{   
         const model = await req.Model.create(req.body);
         res.send(model)
     });
