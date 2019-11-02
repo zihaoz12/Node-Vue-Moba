@@ -1,7 +1,7 @@
 <template>
 <el-container style="height: 100vh; ">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu router :default-openeds="['3']" unique-opened: default-active="$route.path">
+    <el-menu router :default-openeds="['1']" unique-opened: default-active="$route.path">
       <el-submenu  index="1">
         <template slot="title"><i class="el-icon-message"></i>Data Manager</template>        
         <el-menu-item-group>
@@ -56,12 +56,12 @@
       <el-dropdown>
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>查看</el-dropdown-item>
-          <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
+          <el-dropdown-item>Edit</el-dropdown-item>
+          <el-dropdown-item>Add</el-dropdown-item>
+          <el-dropdown-item>Delete</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>王小虎</span>
+      <el-button @click="LogOut()" type="danger"> Log Out</el-button>
     </el-header>
     
     <el-main>
@@ -94,6 +94,12 @@
       };
       return {
         tableData: Array(20).fill(item)
+      }
+    },
+    methods:{
+      async LogOut(){
+        localStorage.clear();
+        window.location.href='/';
       }
     }
   };
