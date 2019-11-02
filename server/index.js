@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000;
 
-
+app.set('secret','this is secret')
 
 app.use(require('cors')())
 app.use(express.json())
