@@ -128,15 +128,17 @@ export default {
     },
     data(){
         return{
+            categories:[],
+            items:[],
+            heroes:[],
             model:{
                 name:'',
                 avatar:'',
+                skills:[],
                 scores:{
                     difficult:0
                 }
-            },
-            categories:[],
-            items:[]
+            }
         }
     },
     methods:{
@@ -170,6 +172,10 @@ export default {
         async fetchItems(){
             const res = await this.$http.get(`rest/items`)
             this.items = res.data
+        },
+        async fetchHeroes(){
+            const res = await this.$http.get('rest/heroes');
+            this.heroes = res.data
         }
    
 
@@ -177,6 +183,7 @@ export default {
     created(){
         this.fetchCategories(),
         this.fetchItems(),
+        this.fetchHeroes(),
         this.id && this.fetch()
     }
 }

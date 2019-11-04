@@ -46,7 +46,7 @@ const router = new Router({
   
         {path:'/heroes/create',component: HeroEdit},
         {path:'/heroes/list',component: HeroList},
-        {path:'/heroes/edit/:id',component: ArticleEdit, props: true},
+        {path:'/heroes/edit/:id',component: HeroEdit, props: true},
   
         {path:'/articles/create',component: ArticleEdit},
         {path:'/articles/list',component: ArticleList},
