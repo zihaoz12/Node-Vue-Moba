@@ -29,7 +29,18 @@
       </div>
     </div>
   <!-- end of nav icons -->
-    
+    <div class="card bg-white p-3 mt-3"> 
+      <div class="card-header d-flex"> 
+        <i class="el-icon-news"></i>
+        <div class="fs-xxl flex-1 px-2">
+          News
+        </div>
+        <i class="el-icon-more"></i>
+      </div>
+      <div class="card-body">
+
+      </div>
+    </div>
 
 
   </div>
