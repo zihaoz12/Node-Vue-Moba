@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Category List</h1>
+        <h1>Hero List</h1>
             <el-table :data="items">
                 <el-table-column prop="_id" label="ID" width="240">
                 </el-table-column> 

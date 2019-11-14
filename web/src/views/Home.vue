@@ -33,13 +33,14 @@
    
     <m-list-card title="News" :categories="NewsDatas">
       <template #items="{category}">
+        <div class="py-2" v-for="(news, i) in category.newsList" :key="i">
+          <span>[{{news.categoryName}}]</span>
+          <span>|</span>
+          <span> {{news.title}}</span>
+          <span>{{news.date}}</span>
+        </div>
       </template>
-      <div class="py-2" v-for="(news, i) in categories.newsList" :key="i">
-        <span>[{{news.categoryName}}]</span>
-        <span>|</span>
-        <span> {{news.title}}</span>
-        <span>{{news.date}}</span>
-      </div>
+      
     </m-list-card>
 
     <m-card title="Hero List">
@@ -102,6 +103,42 @@ export default {
           // newsList: new Array(5).fill(1).map(v =>({
           //     categoryName:'News',
           //     title:'Vote for your 2019 All-Star players',
+          //     date:'11/13'
+          // }))
+        },
+        {
+          name:"Shops",
+          newsList:[
+            {
+              categoryName:'Clothing',
+              title: "Akali's New Clothing Line",
+              date:'11/13'
+            },
+            {
+              categoryName:'Clothing',
+              title: "Akali's New Clothing Line",
+              date:'11/13'
+            },
+            {
+              categoryName:'Clothing',
+              title: "Akali's New Clothing Line",
+              date:'11/13'
+            },
+            {
+              categoryName:'Clothing',
+              title: "Akali's New Clothing Line",
+              date:'11/13'
+            },
+            {
+              categoryName:'Clothing',
+              title: "Akali's New Clothing Line",
+              date:'11/13'
+            }
+
+          ]
+          // newsList: new Array(5).fill(1).map(v =>({
+          //     categoryName:'Clothing',
+          //     title: "Akali's New Clothing Line",
           //     date:'11/13'
           // }))
         },

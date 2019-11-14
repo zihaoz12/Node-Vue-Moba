@@ -3,15 +3,15 @@
       <div class="nav jc-between">
            <div class="nav-item" :class="{active: active === i}"
             v-for="(category, i) in categories" :key="i"
-            @click="active == i"
+            @click="active === i"
            >
               <div class="nav-link">
-                {{catagory.name}}
+                {{category.name}}
               </div>
             </div>           
         </div>
         <div class="pt-3">
-          <swiper >
+          <swiper>
             <swiper-slide v-for="(category, i) in categories" :key="i">
               <slot name="items" :category="category"></slot>
             </swiper-slide>
