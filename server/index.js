@@ -13,6 +13,7 @@ app.use('/admin', express.static(__dirname + '/admin'))
 require('./plugins/db')(app);
 require('./routes/admin/index')(app);
 
+require('./routes/web/index')(app);
 
 
 

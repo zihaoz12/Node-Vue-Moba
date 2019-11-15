@@ -33,11 +33,11 @@
    
     <m-list-card title="News" :categories="NewsDatas">
       <template #items="{category}">
-        <div class="py-2" v-for="(news, i) in category.newsList" :key="i">
-          <span>[{{news.categoryName}}]</span>
-          <span>|</span>
-          <span> {{news.title}}</span>
-          <span>{{news.date}}</span>
+        <div class="py-2 fd-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
+          <span class="text-info">[{{news.categoryName}}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark">{{news.title}}</span>
+          <span>{{news.createdAt}}</span>
         </div>
       </template>
       
@@ -71,115 +71,20 @@ export default {
         }
       },
       NewsDatas:[
-        {
-          name:"Hot",
-          newsList:[
-            {
-              categoryName:'News',
-              title:'Vote for your 2019 All-Star players',
-              date:'11/13'
-            },
-            {
-              categoryName:'News',
-              title:'Vote for your 2019 All-Star players',
-              date:'11/13'
-            },
-            {
-              categoryName:'News',
-              title:'Vote for your 2019 All-Star players',
-              date:'11/13'
-            },
-            {
-              categoryName:'News',
-              title:'Vote for your 2019 All-Star players',
-              date:'11/13'
-            },
-            {
-              categoryName:'News',
-              title:'Vote for your 2019 All-Star players',
-              date:'11/13'
-            }
-          ]
-          // newsList: new Array(5).fill(1).map(v =>({
-          //     categoryName:'News',
-          //     title:'Vote for your 2019 All-Star players',
-          //     date:'11/13'
-          // }))
-        },
-        {
-          name:"Shops",
-          newsList:[
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            }
-
-          ]
-          // newsList: new Array(5).fill(1).map(v =>({
-          //     categoryName:'Clothing',
-          //     title: "Akali's New Clothing Line",
-          //     date:'11/13'
-          // }))
-        },
-        {
-          name:"Shops",
-          newsList:[
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            },
-            {
-              categoryName:'Clothing',
-              title: "Akali's New Clothing Line",
-              date:'11/13'
-            }
-
-          ]
-          // newsList: new Array(5).fill(1).map(v =>({
-          //     categoryName:'Clothing',
-          //     title: "Akali's New Clothing Line",
-          //     date:'11/13'
-          // }))
-        },
+        
       ]
     };
+  },
+  methods:{
+    async fetchNewsData(){
+      const res = await this.$http.get('news/list');
+      this.NewsDatas = res.data
+      window.console.log('result:',this.NewsDatas);
+  
+    }
+  },
+  created(){
+    this.fetchNewsData()
   }
 }
 </script>
