@@ -36,8 +36,8 @@
         <div class="py-2 fd-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
           <span class="text-info">[{{news.categoryName}}]</span>
           <span class="px-2">|</span>
-          <span class="flex-1 text-dark">{{news.title}}</span>
-          <span>{{news.createdAt}}</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
+          <span class="text-grey fs-sm">{{news.createdAt | date}}</span>
         </div>
       </template>
       
@@ -59,10 +59,15 @@
 </template>
 
 <script>
-
+import dayjs from 'dayjs'
 
 export default {
-  name: 'home',
+  filters:{
+    //format date
+    date(val){
+      return dayjs(val).format('MM/DD')
+    }
+  },
   data(){
     return{
       swiperOption:{
@@ -79,8 +84,6 @@ export default {
     async fetchNewsData(){
       const res = await this.$http.get('news/list');
       this.NewsDatas = res.data
-      window.console.log('result:',this.NewsDatas);
-  
     }
   },
   created(){
