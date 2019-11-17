@@ -33,12 +33,15 @@
    
     <m-list-card title="News" :categories="NewsDatas">
       <template #items="{category}">
-        <div class="py-2 fd-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
+        <router-link 
+          tag= "div" 
+          :to= "`/articles/${news._id}`"
+          class="py-2 fd-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
           <span class="text-info">[{{news.categoryName}}]</span>
           <span class="px-2">|</span>
           <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
           <span class="text-grey fs-sm">{{news.createdAt | date}}</span>
-        </div>
+        </router-link>
       </template>
       
     </m-list-card>
@@ -84,6 +87,7 @@ export default {
     async fetchNewsData(){
       const res = await this.$http.get('news/list');
       this.NewsDatas = res.data
+      window.console.log(this.NewsDatas)
     }
   },
   created(){
