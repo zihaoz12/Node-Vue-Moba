@@ -131,5 +131,12 @@ module.exports = app =>{
         res.send(data)
     })
 
+    //GET HERO detail   
+    router.get('/heroes/:id', async (req, res)=>{
+        const data = await Hero.findById(req.params.id).lean()
+        res.send(data)
+    })
+
+    
     app.use('/web/api', router)
 }
