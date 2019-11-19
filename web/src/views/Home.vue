@@ -46,7 +46,13 @@
       
     </m-list-card>
 
-    <m-card title="Hero List">
+    <m-card title="Hero List" :categories="HeroesData">
+      <template #items="{category}">
+        <div class="py-2 text-center" v-for="(hero, i) in category.heroList" :key="i">
+          <img :src ="hero.avatar" alt>
+          <div> {{hero.name}}</div>
+        </div>
+      </template>
     </m-card>
 
     <m-card title="Video">
@@ -78,20 +84,25 @@ export default {
           el: ".pagination-home"
         }
       },
-      NewsDatas:[
-        
-      ]
+      NewsDatas:[],
+      HeroesData:[]
     };
   },
   methods:{
     async fetchNewsData(){
       const res = await this.$http.get('news/list');
       this.NewsDatas = res.data
-      window.console.log(this.NewsDatas)
+      
+    },
+    async fetchHeroesData(){
+      const res = await this.$http.get('heroes/list');
+      this.HeroesData = res.data
+      window.console.log(this.HeroesData)
     }
   },
   created(){
-    this.fetchNewsData()
+    this.fetchNewsData();
+    this.fetchHeroesData();
   }
 }
 </script>

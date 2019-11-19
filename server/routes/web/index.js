@@ -5,6 +5,8 @@ module.exports = app =>{
     const Article = mongoose.model('Article')
     const Category = mongoose.model('Category')
     const Hero = mongoose.model('Hero')
+
+    //load News data
     router.get('/news/init', async(req,res)=>{
         const parent = await Category.findOne({
             name: 'News'
@@ -25,7 +27,7 @@ module.exports = app =>{
         res.send(newsList)
     }) 
 
-
+    // GET New data routes
     router.get('/news/list', async(req, res)=>{
         // const parent = await Category.findOne({
         //     name: 'News'
@@ -49,7 +51,7 @@ module.exports = app =>{
                 }
             },
             {$addFields: {
-                newsList:{ $slice: ['$newsList', 5]}
+                newsList:{ $slice: ['$newsList', 5]} //only get 5 articles
             }}
         ])
         const subCats = cats.map(v => v._id)
@@ -93,7 +95,34 @@ module.exports = app =>{
         res.send(await Hero.find())
     })
 
-    //Article detail
+    // GET Heroes list routes
+    router.get('/heroes/list', async(req, res)=>{
+        const parent = await Category.findOne({
+            name: 'Hero'
+        })
+        const cats = await Category.aggregate([
+            {$match: {parent: parent._id} },
+            {$lookup: {
+                from: 'heroes',
+                localField: '_id',
+                foreignField: 'categories',
+                as:'heroList'
+                }
+            },
+        ])
+        const subCats = cats.map(v => v._id)
+        cats.unshift({
+            name:'热门',
+            heroList: await Hero.find().where({
+                categories:{ $in: subCats}
+            }).limit(10).lean()//only get 10 heroes in hot
+        })
+        
+
+        res.send(cats)
+    })
+
+    // GET Article detail
     router.get('/articles/:id', async (req,res)=>{
         const data = await Article.findById(req.params.id).lean()
         data.related = await Article.find().where({
