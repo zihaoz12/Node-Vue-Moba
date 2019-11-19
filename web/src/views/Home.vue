@@ -35,7 +35,7 @@
       <template #items="{category}">
         <router-link 
           tag= "div" 
-          :to= "`/articles/${news._id}`"
+          :to="`/articles/${news._id}`"
           class="py-2 fd-lg d-flex" v-for="(news, i) in category.newsList" :key="i">
           <span class="text-info">[{{news.categoryName}}]</span>
           <span class="px-2">|</span>
@@ -46,14 +46,20 @@
       
     </m-list-card>
 
-    <m-card title="Hero List" :categories="HeroesData">
+    <m-list-card title="Hero List" :categories="HeroesData">
       <template #items="{category}">
-        <div class="py-2 text-center" v-for="(hero, i) in category.heroList" :key="i">
-          <img :src ="hero.avatar" alt>
-          <div> {{hero.name}}</div>
+        <div class="d-flex flex-wrap" style="margin:0 -0.1rem;">
+          <router-link 
+          tag="div"
+          :to="`/heroes/${hero._id}`"
+          class="py-2 text-center" style="width: 20%" v-for="(hero, i) in category.heroList" :key="i">
+            <img :src ="hero.avatar" class="w-100" alt>
+            <div> {{hero.name}}</div>
+          </router-link> 
         </div>
+        
       </template>
-    </m-card>
+    </m-list-card>
 
     <m-card title="Video">
     </m-card>
