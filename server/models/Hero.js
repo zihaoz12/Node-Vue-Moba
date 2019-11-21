@@ -7,6 +7,9 @@ const HeroSchema = new mongoose.Schema({
     avatar:{
         type:String
     },
+    banner:{
+        type:String
+    },
     title:{
         type:String
     },
@@ -32,6 +35,12 @@ const HeroSchema = new mongoose.Schema({
             type:String
         },
         name: {
+            type:String
+        },
+        cooldown: {
+            type:String
+        },
+        cost: {
             type:String
         },
         description: {

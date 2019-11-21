@@ -2,8 +2,8 @@
     <div class="about">
         <h1>{{ id ? 'Edit' : "New"}} Hero</h1>
         <el-form label-width="120px" @submit.native.prevent="save">
-            <el-tabs value="skills" type="border-card">
-                <el-tab-pane label="Hero Info">
+            <el-tabs value="basic" type="border-card">
+                <el-tab-pane label="Hero Info" name="basic">
                     <el-form-item label=" Hero name" >
                         <el-input v-model="model.name"></el-input>
                     </el-form-item>
@@ -15,9 +15,21 @@
                             class="avatar-uploader"
                             :action="$http.defaults.baseURL + '/upload'"
                             :show-file-list="false"
-                            :on-success="afterUpload"
+                            :on-success="res => $set(model, 'avatar', res.url)"
                         >
                             <img v-if="model.avatar" :src="model.avatar" class="avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+                    </el-form-item>
+
+                    <el-form-item label="Hero Banner">
+                        <el-upload
+                            class="avatar-uploader"
+                            :action="$http.defaults.baseURL + '/upload'"
+                            :show-file-list="false"
+                            :on-success="res => $set(model, 'banner', res.url)"
+                        >
+                            <img v-if="model.banner" :src="model.banner" class="avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
@@ -58,7 +70,7 @@
                     </el-form-item>
 
                     <el-form-item label=" Pro Builds " >
-                        <el-select v-model="model.items2" multiple>
+                        <el-select  v-model="model.items2" multiple>
                             <el-option  
                                 v-for="item in items" 
                                 :key="item._id"
@@ -99,6 +111,12 @@
                                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                                 </el-upload>
                             </el-form-item>
+                            <el-form-item label="cooldown">   
+                                <el-input v-model="item.cooldown"></el-input>
+                            </el-form-item>
+                            <el-form-item label="cost">   
+                                <el-input v-model="item.cost" ></el-input>
+                            </el-form-item>
                             <el-form-item label="Description">   
                                 <el-input v-model="item.description" type="textarea"></el-input>
                             </el-form-item>
@@ -108,6 +126,32 @@
                             <el-form-item>
                                 <el-button size="small" type="danger" 
                                 @click="model.skills.splice(i,1)">Delete</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-tab-pane>
+                <el-tab-pane label="Best Partners" name="partners">
+                    <el-button type="text" @click="model.partners.push({})">
+                        <i class="el-icon-plus"> Add Heroes</i>
+                    </el-button>
+                    <el-row type="flex" style="flex-wrap: wrap">
+                        <el-col :md="12" v-for="(item, i) in model.partners" :key="i">
+                            <el-form-item label="Hero">   
+                                <el-select filterable v-model="item.hero">
+                                    <el-option 
+                                        v-for="hero in heroes"
+                                        :key="hero._id"
+                                        :value="hero._id"
+                                        :label="hero.name"
+                                    ></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="Description">   
+                                <el-input v-model="item.description" type="textarea"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button size="small" type="danger" 
+                                @click="model.partners.splice(i,1)">Delete</el-button>
                             </el-form-item>
                         </el-col>
                     </el-row>
@@ -137,15 +181,13 @@ export default {
                 skills:[],
                 scores:{
                     difficult:0
-                }
+                },
+                partners:[]
             }
         }
     },
     methods:{
-        afterUpload(res){
-            // this.$set(this.model, 'avatar', res.url)
-            this.model.avatar = res.url
-        },
+        
         async save(){   
             let res;
             if(this.id){
