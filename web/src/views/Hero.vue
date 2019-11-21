@@ -8,7 +8,30 @@
             </div>
             <router-link to="/" tag="div">More &gt;</router-link>
         </div>  
-        <h1>{{model.name}}</h1>
+        <div class="top" :style="{'background-image':`url(${model.banner})`}"> 
+            <div class="info text-white p-3 h-100 d-flex flex-column jc-end">
+                <div>{{model.title}}</div>
+                <h2 class="my-2">{{model.name}}</h2>
+                <div class="fs-sm">{{model.categories.map(v => v.name).join('/')}}</div>
+                <div class="d-flex jc-between pt-2"> 
+                    <div class="scores d-flex ai-center" v-if="model.scores"> 
+                        <span>Difficulty</span>
+                        <span class="badge bg-primary">{{model.scores.difficult}}</span>
+                        <span>Skills</span>
+                        <span class="badge bg-blue-1">{{model.scores.skills}}</span>
+                        <span>Attack</span>
+                        <span class="badge bg-danger">{{model.scores.attack}}</span>
+                        <span>Survie</span>
+                        <span class="badge bg-dark">{{model.scores.survive}}</span>      
+                    </div>
+                    <router-link to="/" tag="span" class="text-grey fs-sm">
+                        Skin:2 &gt;
+                    </router-link>
+                </div> 
+            </div>       
+        </div>
+        
+        
     </div>
 </template>
 
@@ -25,7 +48,8 @@ export default {
     methods:{
         async fetchHero(){   
             const res = await this.$http.get(`heroes/${this.id}`)
-            this.model = res.data;     
+            this.model = res.data;   
+             
         }
     },
     created(){
@@ -34,4 +58,32 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+    .page-hero{
+        .top{
+            height: 50vw;
+            background: #fff no-repeat top center;
+            background-size: auto 100%;
+
+        }
+        .info{
+            background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1));
+            .scores{
+                .badge{
+                    margin: 0 0.25rem;
+                    display: inline-block;
+                    width: 1rem;
+                    height: 1rem;
+                    line-height: 0.9rem;
+                    text-align: center;
+                    border-radius: 50%;
+                    font-size: 0.6rem;
+                    border:1px solid rgba(255,255,255,0.2)
+                }
+            }
+        }
+    }
+</style>
+
 
